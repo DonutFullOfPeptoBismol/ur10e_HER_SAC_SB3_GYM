@@ -28,3 +28,4 @@ pip install numpy
 pip install matplotlib
 pip install stable_baselines3
 
+the hierarchy for files is shown in the nest.png
