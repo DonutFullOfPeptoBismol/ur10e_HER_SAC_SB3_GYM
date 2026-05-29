@@ -17,8 +17,8 @@ The project used three computers for teaching, using either CPU or CUDA but it's
 
 | computer    | CPU | GPU    | CUDA/CPU | RAM    | OS |
 | -------- | ------- | -------- | ------- | -------- | ------- |
-| PC 1  | Intel® Core™ i5-7400 × 4   | Intel® HD Graphics 630 | CPU | 8 GiB | Ubuntu 24.04.4 LTS |
-| PC 2 | NVIDIA GeForce RTX 4090     | AMD Ryzen Threadripper PRO 5975WX | CUDA | 512 GiB | Ubuntu 24.04.4 LTS |
+| PC 1  | Intel® Core™ i5-7400 × 4   | Intel® HD Graphics 630 | CPU | 8 GiB | Ubuntu 24.04.4 - ROS2 Jazzy|
+| PC 2 | NVIDIA GeForce RTX 4090     | AMD Ryzen Threadripper PRO 5975WX | CUDA | 512 GiB | Ubuntu 24.04.4 - ROS2 Humble |
 | PC 3    | intel i5    | rtx 3070 | CUDA | 16GiB| Windows 10|
 
 ## Dependencies
@@ -44,21 +44,26 @@ The project used three computers for teaching, using either CPU or CUDA but it's
 | gamma | 0.99 | 
 | ent_coef | auto |
 
+
+### Algorithm: PPO (Proximity Policy Optimization)
+| Hyperparameter    | Value | Reasoning    |
+| -------- | ------- | -------- |
+| learning_rate | 3e-4 |
+| n_steps | 1024 |
+| batch_size    | 64 |
+| n_epochs | 10 |
+| gamma | 0.99 |
+| gae_lambda | 0.95 |
+| clip_range | 0.2 |
+| ent_coef | 0.01 | 
+| vf_coef | 0.5 |
+| max_grad_norm | 0.5 |
+| verbose | 1 |
+
 ### Teaching results
 
->success condition will cause the episode to end early and not use up all of its alloted steps, which will cause it to show more episodes than if it ran 1000 timesteps for each episode
+#### HER SAC - Reach target
 
-Stage 0,1 only: reach
-Episodes: 4500
-Sucess rate: ~100%
-Time elapsed: 1200s
-total timesteps: 1_800_000
-timesteps per episode: 1000
-timesteps to achieve success: ~600
-Goal: TCP consistently reaching target
-Notes: Model stagnates at 80-90% at under 3000 episodes but reaches 100% after 3000 episodes, sometimes falls to 98-99%
-
->model oscilates when reaching the target instead of standing still, let run for 2-3mil timesteps for more stable results
 ### Stages explained
 
 WIP
@@ -93,3 +98,25 @@ WIP
 ## Success conditions
 ---------------
 ## Setup
+
+## Checkpoints
+
+## Deeper explanations
+add link to second file
+
+## Example results
+add link to third file for example results analysis and graphs
+
+>success condition will cause the episode to end early and not use up all of its alloted steps, which will cause it to show more episodes than if it ran 1000 timesteps for each episode
+
+Stage 0,1 only: reach
+Episodes: 4500
+Sucess rate: ~100%
+Time elapsed: 1200s
+total timesteps: 1_800_000
+timesteps per episode: 1000
+timesteps to achieve success: ~600
+Goal: TCP consistently reaching target
+Notes: Model stagnates at 80-90% at under 3000 episodes but reaches 100% after 3000 episodes, sometimes falls to 98-99%
+
+>model oscilates when reaching the target instead of standing still, let run for 2-3mil timesteps for more stable results
