@@ -44,7 +44,7 @@ The project used three computers for teaching, using either CPU or CUDA but it's
 | gamma | 0.99 | 
 | ent_coef | auto |
 
-## Teaching results
+### Teaching results
 
 >success condition will cause the episode to end early and not use up all of its alloted steps, which will cause it to show more episodes than if it ran 1000 timesteps for each episode
 
@@ -59,11 +59,14 @@ Goal: TCP consistently reaching target
 Notes: Model stagnates at 80-90% at under 3000 episodes but reaches 100% after 3000 episodes, sometimes falls to 98-99%
 
 >model oscilates when reaching the target instead of standing still, let run for 2-3mil timesteps for more stable results
+### Stages explained
 
-## Reward Design
+WIP
+
+### Reward Design
 ```
 Phase 0: (Reach target)
-
+    WIP
 Phase 1: (Reach target fine)
 
 Phase 2: (wait and clamp)
@@ -72,3 +75,21 @@ Phase 2: (wait and clamp)
 Phase 3: (Lift)
 ```
 
+### Observation Space - 35 dimensions
+
+WIP
+
+### Achieved goal - 3 dimensions
+
+WIP
+
+### Desired goal - 3 dimensions
+
+WIP
+
+### Action space - 9 dimensions?
+
+WIP
+## Success conditions
+---------------
+## Setup
