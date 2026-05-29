@@ -10,7 +10,7 @@ The goal of this project is to research the viability of MuJoCo for reinforcemen
 ## Colaboration
 
 This project was made in colaboration with "Jožef Stefan" Institute.
-![Logo of the Institute of "Jožef Stefan"."](https://ctop.ijs.si/wp-content/uploads/2022/09/josef-stefan1.png) 
+![Logo of the Institute of "Jožef Stefan"."](https://ctop.ijs.si/wp-content/uploads/2018/06/IJS_logo_2-1024x311.jpg) 
 ## Workstations
 
 The project used three computers for teaching, using either CPU or CUDA but it's advised to use CUDA.
@@ -18,8 +18,8 @@ The project used three computers for teaching, using either CPU or CUDA but it's
 | computer    | CPU | GPU    | CUDA/CPU | RAM    | OS |
 | -------- | ------- | -------- | ------- | -------- | ------- |
 | PC 1  | Intel® Core™ i5-7400 × 4   | Intel® HD Graphics 630 | CPU | 8 GiB | Ubuntu 24.04.4 LTS |
-| PC 2 | 2x NVIDIA GeForce RTX 4090     | 2x NVIDIA GeForce RTX 4090 | CUDA |
-| PC 3    | $420    |
+| PC 2 | NVIDIA GeForce RTX 4090     | AMD Ryzen Threadripper PRO 5975WX | CUDA | 512 GiB | Ubuntu 24.04.4 LTS |
+| PC 3    | intel i5    | rtx 3070 | CUDA | 16GiB| Windows 10|
 
 ## Dependencies
 
@@ -68,5 +68,7 @@ Phase 1: (Reach target fine)
 
 Phase 2: (wait and clamp)
 
+
 Phase 3: (Lift)
 ```
+
