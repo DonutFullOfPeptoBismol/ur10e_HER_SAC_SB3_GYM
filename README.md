@@ -1,31 +1,72 @@
-# ur10e_HER_SAC_SB3_GYM
-ur10e is taught how to pick and place a box from a random position to a random target
+# UR10e SAC HER SB3 GYM MuJoCo Reinforcement Learning
 
-all important files are in Gymnasium-Robotics-main/custom/ur10e_build
+Reinforcement learning for teaching a UR10e arm to learn and complete "reach" task and "pick and place" task. 
 
-download dependencies from dependencies.txt
+This project uses SAC/PPO,curriculum learning, HER, Gymnasium-robotics and Stable-baselines3 within MuJoCo simulator. 
 
-run ur10e_tester.py to start training, it will make checkpoints every 100 episodes, make a save at the end
+The subject is a UR10e arm with a Robotiq 2F-85 gripper.
 
-run ur10e_loader.py to view results of checkpoint or save
+The goal of this project is to research the viability of MuJoCo for reinforcement learning and produce a easy to use and replicate example.
+## Colaboration
 
-stage 0 goes 20 cm above block, open gripper
-stage 1 goes 5 cm above block, open gripper (intended to go directly ontop of block but for testing set it to 5cm above to avoid crashes to floor)
-stage 2 closes gripper and lifts block above threshold
+This project was made in colaboration with "Jožef Stefan" Institute.
+![Logo of the Institute of "Jožef Stefan"."](https://ctop.ijs.si/wp-content/uploads/2022/09/josef-stefan1.png) 
+## Workstations
 
-classic pick and place script for ur10e with 2f85 gripper but doesnt work beyond stage 0, even stage 0 is inconsistent and unprecise
+The project used three computers for teaching, using either CPU or CUDA but it's advised to use CUDA.
 
-uses cartesian system converted with a jacobian matrix from joints but has the same or worse results as when I used joints
+| computer    | CPU | GPU    | CUDA/CPU | RAM    | OS |
+| -------- | ------- | -------- | ------- | -------- | ------- |
+| PC 1  | Intel® Core™ i5-7400 × 4   | Intel® HD Graphics 630 | CPU | 8 GiB | Ubuntu 24.04.4 LTS |
+| PC 2 | 2x NVIDIA GeForce RTX 4090     | 2x NVIDIA GeForce RTX 4090 | CUDA |
+| PC 3    | $420    |
 
-uses mujoco with stable baselines 3, gymnasium robotics, SAC + HER (PPO got me worse results)
+## Dependencies
 
-the main intend of the robot is (without locking any joint) to teach it to entend its arm without curling towards the box, have the TCP always looking downwards
-and grab the box above the treshold, 20cm or something and hopefully eventually move it towards the target point
+* Python 3.12.3
+* Numpy 1.26.4
+* Mujoco 3.8.1
+* gymnasium
+* stable-baselines3
 
-pip install gymnasium
-pip install gymnasium_robotics
-pip install numpy
-pip install matplotlib
-pip install stable_baselines3
+## RL System
 
-the hierarchy for files is shown in the nest.png
+### Algorithm: SAC (Soft-Actor-Critic)
+| Hyperparameter    | Value | Reasoning    |
+| -------- | ------- | -------- |
+| learning_starts | 32000 |
+| buffer_size | 500000 |
+| batch_size    | 512 |
+| gradient_steps | 1 |
+| tau | 0.005 |
+| verbose | 1 |
+| learning_rate | 1e-3 |
+| gamma | 0.99 | 
+| ent_coef | auto |
+
+## Teaching results
+
+>success condition will cause the episode to end early and not use up all of its alloted steps, which will cause it to show more episodes than if it ran 1000 timesteps for each episode
+
+Stage 0,1 only: reach
+Episodes: 4500
+Sucess rate: ~100%
+Time elapsed: 1200s
+total timesteps: 1_800_000
+timesteps per episode: 1000
+timesteps to achieve success: ~600
+Goal: TCP consistently reaching target
+Notes: Model stagnates at 80-90% at under 3000 episodes but reaches 100% after 3000 episodes, sometimes falls to 98-99%
+
+>model oscilates when reaching the target instead of standing still, let run for 2-3mil timesteps for more stable results
+
+## Reward Design
+```
+Phase 0: (Reach target)
+
+Phase 1: (Reach target fine)
+
+Phase 2: (wait and clamp)
+
+Phase 3: (Lift)
+```
